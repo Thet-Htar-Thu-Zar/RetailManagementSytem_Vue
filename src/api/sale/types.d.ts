@@ -23,3 +23,9 @@ export type GetAllSaleType = {
     updatedBy : string,
     activeFlag : boolean
 }
+
+export type GetSaleSummary = {
+    TotalSaleRevenue : number,
+    TotalSaleProfit : number,
+}
+
