@@ -1,41 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-// export const useCounterStore = defineStore("counter", {
-//     state: () => ({
-//         cartItems: [] as {id: string; name: string; price: number; quantity: number }[],
-//     }),
-//     getters: {
-//         totalItems: (state) => state.cartItems.reduce((sum, item) => sum + item.quantity, 0),
-//         totalPrice: (state) => 
-//             state.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-//     },
-//     actions: {
-
-//         addToCart(product: { id: string; name: string; price: number }) {
-//             const existingItem = this.cartItems.find((item) => item.id === product.id);
-//             if (existingItem) {
-                
-//               existingItem.quantity++;
-//             } else {
-//               this.cartItems.push({...product, quantity: 1 });
-//             }
-//           },
-//           removeFromCart(productId: string) {
-//             const index = this.cartItems.findIndex((item) => item.id === productId);
-//             if (index !== -1) {
-//               if (this.cartItems[index].quantity > 1) {
-//                 this.cartItems[index].quantity--;
-//               } else {
-//                 this.cartItems.splice(index, 1);
-//               }
-//             }
-//     },
-// },
-
-
-// })
-
 export interface Product{
   productID : string;
   productName: string;
