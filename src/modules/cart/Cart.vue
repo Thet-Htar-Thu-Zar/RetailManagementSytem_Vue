@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import { useCounterStore } from './cartStore';
+import Table from '@/components/ui/table/Table.vue';
+import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const cartStore = useCounterStore();
 
@@ -25,49 +27,49 @@ const cartStore = useCounterStore();
         <div class="flex gap-4">
           <Button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-red-600" @click="cartStore.clearCart">Clear All Cart</Button>
           <RouterLink to="/cashier">
-            <Button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-green-600">Proceed to Cashier</button>
+            <Button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-green-600">Proceed to Cashier</Button>
           </RouterLink>
         </div>
       </div>
 
-      <table class="w-full border-collapse border border-gray-300 text-left">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-4 py-2 border border-gray-300">Product Name</th>
-            <th class="px-4 py-2 border border-gray-300">Product Price</th>
-            <th class="px-4 py-2 border border-gray-300">Quantity</th>
-            <th class="px-4 py-2 border border-gray-300">Total</th>
-            <th class="px-4 py-2 border border-gray-300">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in cartStore.cartItems" :key="item.productID" class="hover:bg-gray-100">
-            <td class="px-4 py-2 border border-gray-300">{{ item.productName }}</td>
-            <td class="px-4 py-2 border border-gray-300">${{ item.productPrice }}</td>
-            <td class="px-4 py-2 border border-gray-300">
+      <Table class="w-full border-collapse border border-gray-300 text-left">
+        <TableHeader class="bg-gray-200">
+          <TableRow>
+            <TableHead class="px-4 py-2 border border-gray-300">Product Name</TableHead>
+            <TableHead class="px-4 py-2 border border-gray-300">Product Price</TableHead>
+            <TableHead class="px-4 py-2 border border-gray-300">Quantity</TableHead>
+            <TableHead class="px-4 py-2 border border-gray-300">Total</TableHead>
+            <TableHead class="px-4 py-2 border border-gray-300">Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="item in cartStore.cartItems" :key="item.productID" class="hover:bg-gray-100">
+            <TableCell class="px-4 py-2 border border-gray-300">{{ item.productName }}</TableCell>
+            <TableCell class="px-4 py-2 border border-gray-300">${{ item.productPrice }}</TableCell>
+            <TableCell class="px-4 py-2 border border-gray-300">
               <div class="flex items-center gap-2">
-                <button @click="cartStore.addToCart(item)" 
+                <Button @click="cartStore.addToCart(item)" 
                   :disabled="item.quantity === item.remainingStock" 
                   class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">
                   +
-                </button>
+                </Button>
                 {{ item.quantity }}
-                <button @click="cartStore.removeFromCart(item.productID)" 
+                <Button @click="cartStore.removeFromCart(item.productID)" 
                   class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
                   -
-                </button>
+                </Button>
               </div>
-            </td>
-            <td class="px-4 py-2 border border-gray-300">${{ item.productPrice * item.quantity }}</td>
-            <td class="px-4 py-2 border border-gray-300">
-              <button @click="cartStore.removeFromCart(item.productID)" 
+            </TableCell>
+            <TableCell class="px-4 py-2 border border-gray-300">${{ item.productPrice * item.quantity }}</TableCell>
+            <TableCell class="px-4 py-2 border border-gray-300">
+              <Button @click="cartStore.removeFromCart(item.productID)" 
                 class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
                 Remove
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </Button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
   </div>
 </template>
