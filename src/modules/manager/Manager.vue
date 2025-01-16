@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { fetchSales, fetchSaleSummary } from '@/api/sale/queries';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { computed } from 'vue';
 
 const {data} = fetchSales.useQuery();
 
@@ -27,6 +28,7 @@ const{data:summary} = fetchSaleSummary.useQuery();
                 <h2 class="text-sm font-semibold text-gray-500">Total Sale Revenue</h2>
                 <p class="text-xl font-bold text-gray-800">${{ summary?.totalSaleRevenue }}</p>
             </div>
+            
         </div>
 
         <div class="bg-white shadow-md rounded-lg">
