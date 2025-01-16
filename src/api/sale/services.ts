@@ -1,5 +1,5 @@
 import axiosInstance, { APIResponse } from "../config"
-import { AddSaleType, GetAllSaleType } from "./types"
+import { AddSaleType, GetAllSaleType, GetSaleSummary } from "./types"
 
 const baseUrl = "/Sale"
 const createSale = async (sale: AddSaleType): Promise<APIResponse<AddSaleType>> => {
@@ -14,4 +14,9 @@ const getAllSale = async (): Promise<APIResponse<GetAllSaleType[]>> => {
     return response.data
 }
 
-export default {createSale, getAllSale}
+const getSaleSummary = async () : Promise<APIResponse<GetSaleSummary>> => {
+    const response = await axiosInstance.get<APIResponse<GetSaleSummary>>(`${baseUrl}/GetSaleSummary`)
+
+    return response.data
+}
+export default {createSale, getAllSale, getSaleSummary}
