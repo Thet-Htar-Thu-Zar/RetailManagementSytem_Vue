@@ -1,7 +1,9 @@
 import { useMutation, useQuery, useQueryClient, type UseMutationOptions, type UseQueryOptions } from '@tanstack/vue-query'
 import addSaleServices from './services'
 import getSaleServices from './services'
-import type { AddSaleType, GetAllSaleType } from './types'
+import getSaleSummaryServices from './services'
+
+import type { AddSaleType, GetAllSaleType, GetSaleSummary } from './types'
 import type { APIResponse } from '../config'
 
 export const addSale = {
@@ -30,3 +32,18 @@ export const fetchSales = {
             ...opt
         })
 }
+
+export const fetchSaleSummary = {
+    useQuery: (opt?: UseQueryOptions<GetSaleSummary, Error>) =>
+        useQuery<GetSaleSummary, Error>({
+            queryKey: ['getsalesummary'],
+            queryFn: async () => {
+                const response: APIResponse<GetSaleSummary> = await getSaleSummaryServices.getSaleSummary()
+
+                return response.data
+            },
+            ...opt
+        })
+}
+
+
