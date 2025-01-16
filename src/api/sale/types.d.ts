@@ -1,7 +1,7 @@
 export type AddSaleType = {
     // SaleID : string,
-    ProductID : string,
-    QuantitySold : number,
+    productID : string,
+    quantitySold : number,
     // TotalPrice : number,
     // TotalProfit : number,
     // createdDate: string,
@@ -12,11 +12,11 @@ export type AddSaleType = {
 }
 
 export type GetAllSaleType = {
-    SaleID : string,
-    ProductID : string,
-    QuantitySold : string,
-    TotalPrice : number,
-    TotalProfit : number,
+    saleID : string,
+    productID : string,
+    quantitySold : string,
+    totalPrice : number,
+    totalProfit : number,
     createdDate: string,
     updatedDate: string,
     createdBy : string,
@@ -25,7 +25,7 @@ export type GetAllSaleType = {
 }
 
 export type GetSaleSummary = {
-    TotalSaleRevenue : number,
-    TotalSaleProfit : number,
+    totalSaleRevenue : number,
+    totalSaleProfit : number,
 }
 
