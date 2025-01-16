@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { fetchSales, fetchSaleSummary } from '@/api/sale/queries';
-import { Card } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const {data} = fetchSales.useQuery();
 
 const{data:summary} = fetchSaleSummary.useQuery();
-// const totalRevenue = summary.value?.totalSaleRevenue;
-// const totalProfit = summary.value?.totalSaleProfit;
+
 
 </script>
 
@@ -20,12 +18,12 @@ const{data:summary} = fetchSaleSummary.useQuery();
       </header>
   
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-3">
-            <div class="border border-gray-300 rounded-lg p-4 shadow-sm">
+            <div class="border border-gray-300 rounded-lg p-4 shadow-sm bg-slate-200">
                 <h2 class="text-sm font-semibold text-gray-500">Total Sale Profit</h2>
                 <p class="text-xl font-bold text-gray-800">${{ summary?.totalSaleProfit }}</p>
             </div>
 
-            <div class="border border-gray-300 rounded-lg p-4 shadow-sm">
+            <div class="border border-gray-300 rounded-lg p-4 shadow-sm bg-slate-200">
                 <h2 class="text-sm font-semibold text-gray-500">Total Sale Revenue</h2>
                 <p class="text-xl font-bold text-gray-800">${{ summary?.totalSaleRevenue }}</p>
             </div>
