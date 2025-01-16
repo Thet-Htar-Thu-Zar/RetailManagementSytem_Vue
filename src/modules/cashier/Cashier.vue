@@ -41,11 +41,14 @@ function handleCashOut() {
       console.error(`Error processing item ${data.ProductID}: `, error);
     }
   });
-
+  
   alert('Transaction completed successfully!');
+  clearCashier();
 }
 
-
+const clearCashier = () => {
+    cartStore.cartItems.length = 0;
+  };
 </script>
 
 <template>
