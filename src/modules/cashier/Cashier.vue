@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { addSale } from '@/api/sale/queries';
 import { useCounterStore } from '../cart/cartStore';
+import { Button } from '@/components/ui/button';
 
 const cartStore = useCounterStore();
 
@@ -29,8 +30,8 @@ function handleCashOut() {
   }
 
   const saleData = cartStore.cartItems.map((item) => ({
-    ProductID: item.productID,
-    QuantitySold: item.quantity,
+    productID: item.productID,
+    quantitySold: item.quantity,
     createdBy: 'user',
   }));
 
@@ -38,7 +39,7 @@ function handleCashOut() {
     try {
       mutate(data);
     } catch (error) {
-      console.error(`Error processing item ${data.ProductID}: `, error);
+      console.error(`Error processing item ${data.productID}: `, error);
     }
   });
   
@@ -73,10 +74,10 @@ const clearCashier = () => {
             </div>
         </div>
     
-        <button class="mt-8 w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-3 rounded-lg hover:from-green-500 hover:to-blue-600 transform transition-transform duration-200 ease-in-out"
+        <Button class="mt-8 w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-3 rounded-lg hover:from-green-500 hover:to-blue-600 transform transition-transform duration-200 ease-in-out"
         @click="handleCashOut"
         >
             Cash Out
-        </button>
+        </Button>
     </div>
 </template>
