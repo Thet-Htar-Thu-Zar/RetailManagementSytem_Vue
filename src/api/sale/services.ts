@@ -9,7 +9,7 @@ const createSale = async (sale: AddSaleType): Promise<APIResponse<AddSaleType>> 
 }
 
 const getAllSale = async (): Promise<APIResponse<GetAllSaleType[]>> => {
-    const response = await axiosInstance.get<APIResponse<GetAllSaleType[]>>(`${baseUrl}/GetAllProduct`)
+    const response = await axiosInstance.get<APIResponse<GetAllSaleType[]>>(`${baseUrl}/GetSaleReport`)
 
     return response.data
 }
