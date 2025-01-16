@@ -1,61 +1,10 @@
 <script setup lang="ts">
-import { Table, TableBody, TableCaption, TableCell, TableRow } from '@/components/ui/table';
-import TableHeader from '@/components/ui/table/TableHeader.vue';
-import { useCounterStore } from './cartStore';
 import { Button } from '@/components/ui/button';
-import { LucideShoppingCart, ShoppingBag } from 'lucide-vue-next';
+import { useCounterStore } from './cartStore';
 
 const cartStore = useCounterStore();
-// console.log(cartStore);
 
 </script>
-
-<!-- <template>
-
-    <section class="p-3 h-full">
-    <TableCaption class="w-full text-4xl flex justify-center pb-7">Cart Page</TableCaption>
-   
-    <Table class="w-full border-collapse border border-gray-300">
-      <TableRow>
-        <TableCell class="w-[200px]">
-            Product Name
-        </TableCell>
-        <TableCell>Remaining Stock</TableCell>
-        <TableCell>Product Price</TableCell>
-        <TableCell>Product Quantity</TableCell>
-        <TableCell>Total</TableCell>
-        <TableCell class="pr-7 ">Action</TableCell>
-
-      </TableRow>
-    <TableBody>
-      <TableRow v-for="item in cartStore.cartItems" :key="item.id">
-       
-        <TableCell>{{ item.name }}</TableCell>
-        <TableCell>{{ item.price }}</TableCell>
-        <TableCell>{{ item.quantity }}</TableCell>
-        <TableCell>{{ item.price * item.quantity }}</TableCell>
-
-        <TableCell><Button
-          @click="cartStore.addToCart(item)" class="mr-4 bg-green-500 text-white px-2 py-1">
-          + </Button>
-          <Button 
-          @click="cartStore.removeFromCart(item.id)" class="mr-4 bg-red-500 text-white px-2 py-1">
-            - </Button>
-          
-          </TableCell>
-        
-      </TableRow>
-    </TableBody>
-    </Table>
-    <div class="mt-4">
-      <p>Total Items: {{ cartStore.totalItems }}</p>
-      <p>Total Price: {{ cartStore.totalPrice }}</p>
-      <Button class="text-lg px-4 py-2 mt-4 flex justify-center h-100">
-        <RouterLink to="/cashier">Proceed to Cashier</RouterLink>
-      </Button>
-    </div>
-    </section>
-</template> -->
 
 <template>
   <div class="p-6 min-h-screen bg-gray-100">
@@ -74,9 +23,9 @@ const cartStore = useCounterStore();
           <p class="text-xl font-medium text-gray-700">Total Items: <span class="font-bold">{{ cartStore.cartItems.reduce((total, item) => total + item.quantity, 0) }}</span></p>
         </div>
         <div class="flex gap-4">
-          <button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-red-600" @click="cartStore.clearCart">Clear All Cart</button>
+          <Button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-red-600" @click="cartStore.clearCart">Clear All Cart</Button>
           <RouterLink to="/cashier">
-            <button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-green-600">Proceed to Cashier</button>
+            <Button class="px-4 py-2 text-white bg-black rounded-lg hover:bg-green-600">Proceed to Cashier</button>
           </RouterLink>
         </div>
       </div>
