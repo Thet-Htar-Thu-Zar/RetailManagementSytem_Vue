@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-vue": "^0.5.4",
     "@tanstack/vue-query": "^5.64.0",
     "@vueuse/core": "^12.3.0",
     "axios": "^1.7.9",
