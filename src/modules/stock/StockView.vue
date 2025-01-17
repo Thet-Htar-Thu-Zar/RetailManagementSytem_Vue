@@ -11,41 +11,6 @@ import { computed } from 'vue';
   // const cartStore = useCounterStore();
   const cartStore = useCounterStore();
 
-  //For Add to cart
-  // const addToCart = (ProductID: string) => {
-  //   const existingItem = cartItems.value.find((item) => item.id === ProductID);
-  //   if(existingItem) {
-  //     existingItem.quantity++;
-  //   }
-  //   else{
-  //     cartItems.value.push({id: ProductID, quantity: 1});
-  //   }
-  // };
-  // const addToCart = (product: {id: string; name: string; price: number}) =>{
-  //   cartStore.addToCart(product);
-  // };
-
-  // //For Remove from Cart
-
-  // // const removeFromCart = (ProductID: string) => {
-  // //   const existingItem = cartItems.value.find((item)=> item.id !== ProductID);
-  // //   if(existingItem){
-  // //     existingItem.quantity--;
-  // //     if(existingItem.quantity == 0){
-  // //       cartItems.value = cartItems.value.filter((item) => item.id !== ProductID);
-  // //     }
-  // //   }
-  // // };
-  
-  // const removeFromCart = (productId: string) => {
-  //   cartStore.removeFromCart(productId);
-  // };
-
-  //To get total items in cart
-//   const totalItemsInCart = computed(() => 
-//   cartItems.value.reduce((total, item) => total + item.quantity, 0)
-// );
-
   const totalItemsInCart = computed(() => cartStore.cartItems.reduce((total, item) => total + item.quantity, 0) );
   </script>
 
@@ -67,7 +32,7 @@ import { computed } from 'vue';
             <TableHead>Remaining Stock</TableHead>
             <TableHead>Product Price</TableHead>
             <TableHead>Product Profit</TableHead>
-            <TableHead class="ml-30 pl-40">Action</TableHead>
+            <TableHead class="ml-10 ">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -76,8 +41,8 @@ import { computed } from 'vue';
             <TableCell class="w-[200px]">{{ products.remainingStock }}</TableCell>
             <TableCell class="w-[200px]">${{ products.productPrice }}</TableCell>
             <TableCell class="w-[200px]">${{ products.productProfit }}</TableCell>
-            <TableCell class="pl-10">
-              <Button class="bg-blue-500 mr-4" 
+            <TableCell class="">
+              <Button class="bg-blue-500 mb-3" 
               @click="cartStore.addToCart(products)" >
                 Add to Cart <LucideShoppingCart />
               </Button>
