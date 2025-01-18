@@ -58,6 +58,42 @@ export const useCounterStore = defineStore('counter', () => {
     }
   };
 
+//   const decreaseItem = (product: CartType) => {
+//     if(product.quantity > 1){
+//         product.quantity -= 1;
+//     }else{
+//         removeFromCart(product);
+//     }
+// }
+
+// const IncreaseItem = (product: CartType) => {
+//     if(product.quantity >= product.stock) {
+//         toast({
+//             title: 'Product is out of stock',
+//             variant: 'destructive'
+//         })
+//         return;
+//     }
+//     product.quantity += 1;
+//     toast({
+//         title: 'Successfully added to cart'
+//     })
+// }
+
+  // const decreaseQuantity = (productId: string, quantity: number) => {
+  //   const item = cartItems.findIndex(item => item.productID === productId);
+
+  //   if(!item)
+  //     return;
+
+  //   if(quantity > 1){
+  //     item.quantity -= 1;
+  //   }
+  //   else{
+  //     cartItems = cartItems.filter
+  //   }
+  // }
+
   const clearCart = () => {
     cartItems.length = 0;
   };
