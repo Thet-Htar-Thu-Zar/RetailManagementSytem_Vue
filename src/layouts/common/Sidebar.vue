@@ -13,10 +13,10 @@ import { Bell, Home, LineChart, Package, Package2, ShoppingCart, Users } from 'l
             <Package2 class="h-6 w-6" />
             <span class="">Chris Market</span>
           </a>
-          <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
+          <!-- <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
             <Bell class="h-4 w-4" />
             <span class="sr-only">Toggle notifications</span>
-          </Button>
+          </Button> -->
         </div>
         <div class="flex-1">
           <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
