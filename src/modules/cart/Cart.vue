@@ -86,7 +86,7 @@ const cartStore = useCounterStore();
                   +
                 </Button>
                 {{ item.quantity }}
-                <Button @click="" 
+                <Button @click="cartStore.decreaseItem(item)" 
                 :disabled="item.quantity <= 1" 
                   class="px-3 py-1 bg-black text-white rounded hover:bg-red-600">
                   -
