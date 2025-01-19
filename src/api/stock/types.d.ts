@@ -11,3 +11,10 @@ export type GetAllProductType = {
     activeFlag : boolean
 }
 
+export type ProductType = {
+    productID : string,
+    productName: string,
+    remainingStock: number,
+    productPrice: number,
+}
+
