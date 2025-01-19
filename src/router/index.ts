@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AppLayout from '@/layouts/AppLayout.vue'
-import Dashboard from '@/modules/dashboard/Dashboard.vue'
 import StockView from '@/modules/stock/StockView.vue'
 import Cart from '@/modules/cart/Cart.vue'
 import Cashier from '@/modules/cashier/Cashier.vue'
@@ -14,13 +13,13 @@ const router = createRouter({
       name: '',
       component: AppLayout,
       children: [
+        // {
+        //   path: '/',
+        //   name: 'dashboard',
+        //   component: Dashboard,
+        // },
         {
-          path: '/',
-          name: 'dashboard',
-          component: Dashboard,
-        },
-        {
-            path: '/stock',
+            path: '/',
             name: 'stock',
             component: StockView,
           },
