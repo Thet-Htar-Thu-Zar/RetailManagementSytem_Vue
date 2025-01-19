@@ -2,6 +2,7 @@
 import { addSale } from '@/api/sale/queries';
 import { useCounterStore } from '../cart/cartStore';
 import { Button } from '@/components/ui/button';
+import { RouterLink, useRouter } from 'vue-router';
 
 const cartStore = useCounterStore();
 
@@ -21,6 +22,8 @@ const cartStore = useCounterStore();
 // })
 
 const {mutate} = addSale.useMutation({})
+
+const router = useRouter();
 
 function handleCashOut() {
   
@@ -45,6 +48,7 @@ function handleCashOut() {
   
   alert('Transaction completed successfully!');
   clearCashier();
+  router.push('/');
 }
 
 const clearCashier = () => {
@@ -75,9 +79,10 @@ const clearCashier = () => {
         </div>
     
         <Button class="mt-8 w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-3 rounded-lg hover:from-green-500 hover:to-blue-600 transform transition-transform duration-200 ease-in-out"
-        @click="handleCashOut"
+        @click="handleCashOut" 
         >
-            Cash Out
+            Cash Out  
         </Button>
+       
     </div>
 </template>
