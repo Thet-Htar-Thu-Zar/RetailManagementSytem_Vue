@@ -1,3 +1,4 @@
+import { GetAllProductType, ProductType } from "@/api/stock/types";
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
@@ -48,7 +49,7 @@ export const useCounterStore = defineStore('counter', () => {
       cartItems.push({ ...product, quantity: 1 });
     }
   };
-  
+ 
   
   const removeFromCart = (productId: string) =>{
     const index = cartItems.findIndex(item => item.productID === productId);
@@ -58,13 +59,14 @@ export const useCounterStore = defineStore('counter', () => {
     }
   };
 
-//   const decreaseItem = (product: CartType) => {
-//     if(product.quantity > 1){
-//         product.quantity -= 1;
-//     }else{
-//         removeFromCart(product);
-//     }
-// }
+  const decreaseItem = (product: ProductType) => {
+    if(product.remainingStock > 1){
+        product.remainingStock -= 1;
+    }else{
+        // removeFromCart(productId);
+        alert("Remaining Stock is not avaliable....");
+    }
+}
 
 // const IncreaseItem = (product: CartType) => {
 //     if(product.quantity >= product.stock) {
@@ -80,20 +82,6 @@ export const useCounterStore = defineStore('counter', () => {
 //     })
 // }
 
-  // const decreaseQuantity = (productId: string, quantity: number) => {
-  //   const item = cartItems.findIndex(item => item.productID === productId);
-
-  //   if(!item)
-  //     return;
-
-  //   if(quantity > 1){
-  //     item.quantity -= 1;
-  //   }
-  //   else{
-  //     cartItems = cartItems.filter
-  //   }
-  // }
-
   const clearCart = () => {
     cartItems.length = 0;
   };
@@ -102,8 +90,7 @@ export const useCounterStore = defineStore('counter', () => {
     cartItems,
     addToCart,
     removeFromCart,
-    // abstractItem,
-    // updateQuantity,
+    decreaseItem,
     clearCart
   }
 });
