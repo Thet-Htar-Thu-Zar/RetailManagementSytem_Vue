@@ -59,14 +59,20 @@ export const useCounterStore = defineStore('counter', () => {
     }
   };
 
-  const decreaseItem = (product: ProductType) => {
-    if(product.remainingStock > 1){
-        product.remainingStock -= 1;
-    }else{
-        // removeFromCart(productId);
-        alert("Remaining Stock is not avaliable....");
+
+  const decreaseItem = (product: Product) => {
+    const existingItem = cartItems.find(item => item.productID === product.productID);
+    
+    if (existingItem) {
+      if (existingItem.quantity < product.remainingStock ) {
+       existingItem.quantity -= 1;
+      }
+      else {
+        alert("Remaining Stock is not enough!");
+        return;
+      }
     }
-}
+  }
 
 // const IncreaseItem = (product: CartType) => {
 //     if(product.quantity >= product.stock) {
