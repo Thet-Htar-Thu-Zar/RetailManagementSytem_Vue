@@ -4,6 +4,7 @@ import { useCounterStore } from './cartStore';
 import Table from '@/components/ui/table/Table.vue';
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
+import { MinusIcon, PlusIcon } from 'lucide-vue-next';
 
 const cartStore = useCounterStore();
 
@@ -83,13 +84,13 @@ const cartStore = useCounterStore();
                 <Button @click="cartStore.addToCart(item)" 
                   :disabled="item.quantity === item.remainingStock" 
                   class="px-3 py-1 bg-black text-white rounded hover:bg-black hover:bg-gradient-to-r from-blue-300 to-green-300">
-                  +
+                  <PlusIcon class="h-3 w-3" />
                 </Button>
                 {{ item.quantity }}
                 <Button @click="cartStore.decreaseItem(item)" 
                 :disabled="item.quantity <= 1" 
                   class="px-3 py-1 bg-black text-white rounded hover:bg-red-600">
-                  -
+                  <MinusIcon class="h-3 w-3" />
                 </Button>
               </div>
             </TableCell>

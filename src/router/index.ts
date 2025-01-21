@@ -1,16 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
-import AppLayout from '@/layouts/AppLayout.vue'
-import StockView from '@/modules/stock/StockView.vue'
-import Cart from '@/modules/cart/Cart.vue'
-import Cashier from '@/modules/cashier/Cashier.vue'
-import Manager from '@/modules/manager/Manager.vue'
+import AppLayout from "@/layouts/AppLayout.vue";
+import Cart from "@/modules/cart/Cart.vue";
+import Cashier from "@/modules/cashier/Cashier.vue";
+import Manager from "@/modules/manager/Manager.vue";
+import ProductView from "@/modules/product/ProductView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: '',
+      path: "/",
+      name: "",
       component: AppLayout,
       children: [
         // {
@@ -19,28 +19,28 @@ const router = createRouter({
         //   component: Dashboard,
         // },
         {
-            path: '/',
-            name: 'stock',
-            component: StockView,
-          },
-          {
-            path: '/cart',
-            name: 'cart',
-            component: Cart,
-          },
-          {
-            path: '/cashier',
-            name: 'cashier',
-            component: Cashier,
-          },
-          {
-            path: '/manager',
-            name: 'manager',
-            component: Manager,
-          },
-      ]
-    }
-   
+          path: "/",
+          name: "product",
+          component: ProductView,
+        },
+        {
+          path: "/cart",
+          name: "cart",
+          component: Cart,
+        },
+        {
+          path: "/cashier",
+          name: "cashier",
+          component: Cashier,
+        },
+        {
+          path: "/manager",
+          name: "manager",
+          component: Manager,
+        },
+      ],
+    },
+
     // {
     //   path: '/about',
     //   name: 'about',
@@ -50,6 +50,6 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue'),
     // },
   ],
-})
+});
 
-export default router
+export default router;
