@@ -1,0 +1,30 @@
+export type GetAllProductType = {
+  productID: string;
+  productName: string;
+  remainingStock: number;
+  productPrice: number;
+  productProfit: number;
+  createdDate: string;
+  updatedDate: string;
+  createdBy: string;
+  updatedBy: string;
+  activeFlag: boolean;
+};
+
+// export type ProductType = {
+//     productID : string,
+//     productName: string,
+//     remainingStock: number,
+//     productPrice: number,
+// }
+
+export type UpdateProductInputType = {
+  productName: string;
+  remainingStock: number;
+  productPrice: number;
+  productProfit: number;
+};
+
+export type DeleteProductType = {
+  productID: string;
+};
