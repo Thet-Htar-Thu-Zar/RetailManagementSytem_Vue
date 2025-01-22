@@ -11,6 +11,8 @@ import { toast } from '@/components/ui/toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader } from '@/components/ui/alert-dialog';
 import ProductDialog from './chunks/ProductDialog.vue';
 import { DeleteProductType, GetAllProductType } from '@/api/product/types';
+import { productcolumns } from './chunks/productColumns';
+import ProductDataTable from './chunks/productData-table.vue';
 
 const { data } = fetchStocks.useQuery();
 const cartStore = useCounterStore();
@@ -74,15 +76,14 @@ const closeDialog = () => {
     </TableCaption>
 
     <div class="flex justify-end mb-5">
-      <!-- <RouterLink to="/cart"
-        class="flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2"> -->
+
       <Button
         class="text-sm items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2 h-10"
         @click="openAddProductDialog">
         <ShoppingBagIcon class="h-4 w-4 ml-1"></ShoppingBagIcon>
         Add New Product
       </Button>
-      <!-- </RouterLink> -->
+
       <RouterLink to="/cart"
         class="flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white py-2 px-4 rounded-lg shadow-2xl transition duration-300 relative">
         <LucideShoppingCart class="h-6 w-6 text-white" />
@@ -94,7 +95,9 @@ const closeDialog = () => {
 
     </div>
 
-    <Table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <ProductDataTable :columns="productcolumns" :data="data || []" />
+
+    <!-- <Table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
       <TableHeader class="bg-gradient-to-r from-green-200 to-blue-300">
         <TableRow>
           <TableHead class="px-6 py-3 text-left text-sm font-medium text-gray-600">No</TableHead>
@@ -115,16 +118,13 @@ const closeDialog = () => {
           <TableCell class="px-6 py-4 text-sm text-gray-700">${{ product.productPrice }}</TableCell>
           <TableCell class="px-6 py-4 text-sm text-gray-700">${{ product.productProfit }}</TableCell>
           <TableCell class="px-6 py-4 pr-0 mr-0 flex gap-4 ml-5">
-            <!-- <Toggle> -->
             <Button
               class="bg-gradient-to-r from-green-400 to-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
               @click="cartStore.addToCart(product)">
               Add to Cart
-              <!-- <LucideShoppingCart class="inline h-4 w-4 ml-1" /> -->
               <DotLottieVue class="w-10 h-10" autoplay loop
                 src="https://lottie.host/8fefe20b-7e96-45cf-a3ad-c2234290ed53/pPANOzbuMZ.lottie"></DotLottieVue>
             </Button>
-            <!-- </Toggle> -->
             <Button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
               @click="cartStore.removeFromCart(product.productID)">
               Remove
@@ -138,7 +138,7 @@ const closeDialog = () => {
           </TableCell>
         </TableRow>
       </TableBody>
-    </Table>
+    </Table> -->
     <ProductDialog :isOpen="isOpen" :isEdit="isEdit" :allProduct="updateOldProduct" :closeDialog="closeDialog" />
 
     <AlertDialog v-bind:open="isDelete">
