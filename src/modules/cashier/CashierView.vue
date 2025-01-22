@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { addSale } from '@/api/sale/queries';
-import { useCounterStore } from '../cart/cartStore';
+import { useCounterStore } from '../stores/cartStore';
 import { Button } from '@/components/ui/button';
 import { RouterLink, useRouter } from 'vue-router';
 import { toast } from '@/components/ui/toast';

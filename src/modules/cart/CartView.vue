@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
-import { useCounterStore } from './cartStore';
+import { useCounterStore } from '../stores/cartStore';
 import Table from '@/components/ui/table/Table.vue';
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
@@ -34,33 +34,37 @@ const cartStore = useCounterStore();
 <template>
   <div class="p-6 min-h-screen bg-gray-100">
     <TableCaption class="text-3xl font-semibold text-center text-black flex justify-center mb-5">Cart Page
-      <DotLottieVue class="w-10 h-10" autoplay loop src="https://lottie.host/8fefe20b-7e96-45cf-a3ad-c2234290ed53/pPANOzbuMZ.lottie"></DotLottieVue>   
+      <DotLottieVue class="w-10 h-10" autoplay loop
+        src="https://lottie.host/8fefe20b-7e96-45cf-a3ad-c2234290ed53/pPANOzbuMZ.lottie"></DotLottieVue>
 
     </TableCaption>
 
-    <div 
-          v-if="cartStore.cartItems.length === 0" 
-          class="flex items-center justify-center min-h-64"
-        >
-          <div class="max-w-lg mx-auto p-6 bg-white shadow-2xl rounded-lg border border-green-300 mt-10">
-            <p class="text-xl font-semibold text-center text-gray-800"> 
-              <DotLottieVue class="h-200 w-200" autoplay loop src="https://lottie.host/e6a4a470-58cd-45b4-9803-bfb87ce1878c/ZL22cIuBrP.lottie"></DotLottieVue>
-              Empty Cart!
-            </p>
-          </div>
+    <div v-if="cartStore.cartItems.length === 0" class="flex items-center justify-center min-h-64">
+      <div class="max-w-lg mx-auto p-6 bg-white shadow-2xl rounded-lg border border-green-300 mt-10">
+        <p class="text-xl font-semibold text-center text-gray-800">
+          <DotLottieVue class="h-200 w-200" autoplay loop
+            src="https://lottie.host/e6a4a470-58cd-45b4-9803-bfb87ce1878c/ZL22cIuBrP.lottie"></DotLottieVue>
+          Empty Cart!
+        </p>
+      </div>
     </div>
 
 
     <div v-else class="bg-white p-6 rounded-lg shadow-lg">
       <div class="flex justify-between items-center mb-6">
         <div>
-          <p class="text-xl font-medium text-gray-700">Total Amount: <span class="font-bold">${{ cartStore.cartItems.reduce((total, item) => total + (item.productPrice * item.quantity), 0) }}</span></p>
-          <p class="text-xl font-medium text-gray-700">Total Items: <span class="font-bold">{{ cartStore.cartItems.reduce((total, item) => total + item.quantity, 0) }}</span></p>
+          <p class="text-xl font-medium text-gray-700">Total Amount: <span class="font-bold">${{
+            cartStore.cartItems.reduce((total, item) => total + (item.productPrice * item.quantity), 0) }}</span></p>
+          <p class="text-xl font-medium text-gray-700">Total Items: <span class="font-bold">{{
+            cartStore.cartItems.reduce((total, item) => total + item.quantity, 0) }}</span></p>
         </div>
         <div class="flex gap-4">
-          <Button class="px-4 py-6 text-white bg-black rounded-lg hover:bg-red-600" @click="cartStore.clearCart">Clear All Cart</Button>
+          <Button class="px-4 py-6 text-white bg-black rounded-lg hover:bg-red-600" @click="cartStore.clearCart">Clear
+            All Cart</Button>
           <RouterLink to="/cashier">
-            <Button class="px-4 py-6 text-white bg-black rounded-lg hover:bg-gradient-to-r from-blue-300 to-green-600">Proceed to Cashier</Button>
+            <Button
+              class="px-4 py-6 text-white bg-black rounded-lg hover:bg-gradient-to-r from-blue-300 to-green-600">Proceed
+              to Cashier</Button>
           </RouterLink>
         </div>
       </div>
@@ -81,14 +85,12 @@ const cartStore = useCounterStore();
             <TableCell class="px-4 py-2 border border-gray-300">${{ item.productPrice }}</TableCell>
             <TableCell class="px-4 py-2 border border-gray-300">
               <div class="flex items-center gap-2">
-                <Button @click="cartStore.addToCart(item)" 
-                  :disabled="item.quantity === item.remainingStock" 
+                <Button @click="cartStore.addToCart(item)" :disabled="item.quantity === item.remainingStock"
                   class="px-3 py-1 bg-black text-white rounded hover:bg-black hover:bg-gradient-to-r from-blue-300 to-green-300">
                   <PlusIcon class="h-3 w-3" />
                 </Button>
                 {{ item.quantity }}
-                <Button @click="cartStore.decreaseItem(item)" 
-                :disabled="item.quantity <= 1" 
+                <Button @click="cartStore.decreaseItem(item)" :disabled="item.quantity <= 1"
                   class="px-3 py-1 bg-black text-white rounded hover:bg-red-600">
                   <MinusIcon class="h-3 w-3" />
                 </Button>
@@ -96,10 +98,10 @@ const cartStore = useCounterStore();
             </TableCell>
             <TableCell class="px-4 py-2 border border-gray-300">${{ item.productPrice * item.quantity }}</TableCell>
             <TableCell class="px-4 py-2 border border-gray-300">
-              <Button @click="cartStore.removeFromCart(item.productID)" 
+              <Button @click="cartStore.removeFromCart(item.productID)"
                 class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
                 Remove
-            </Button>
+              </Button>
             </TableCell>
           </TableRow>
         </TableBody>
@@ -107,4 +109,3 @@ const cartStore = useCounterStore();
     </div>
   </div>
 </template>
-

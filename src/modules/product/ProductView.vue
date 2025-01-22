@@ -2,7 +2,7 @@
 import { deleteProduct, fetchStocks, updateProduct } from '@/api/product/queries';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useCounterStore } from '../cart/cartStore';
+import { useCounterStore } from '../stores/cartStore';
 import { DeleteIcon, LucideShoppingCart, ShoppingBagIcon, Trash2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
