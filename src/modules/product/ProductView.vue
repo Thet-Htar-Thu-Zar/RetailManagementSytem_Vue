@@ -3,13 +3,13 @@ import { deleteProduct, fetchStocks, updateProduct } from '@/api/product/queries
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCounterStore } from '../stores/cartStore';
-import { DeleteIcon, LucideShoppingCart, ShoppingBagIcon, Trash2 } from 'lucide-vue-next';
+import { LucideShoppingCart, ShoppingBagIcon, Trash2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
 import { useQueryClient } from '@tanstack/vue-query';
 import { toast } from '@/components/ui/toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader } from '@/components/ui/alert-dialog';
-import ProductDialog from './ProductDialog.vue';
+import ProductDialog from './chunks/ProductDialog.vue';
 import { DeleteProductType, GetAllProductType } from '@/api/product/types';
 
 const { data } = fetchStocks.useQuery();
