@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { fetchSales, fetchSaleSummary } from '@/api/sale/queries';
+import DataTable from '@/modules/manager/chunks/saleData-table.vue';
+import { salecolumns } from '@/modules/manager/chunks/saleColumns'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useVueTable } from '@tanstack/vue-table';
+import SaleDataTable from '@/modules/manager/chunks/saleData-table.vue';
 
-const { data } = fetchSales.useQuery();
+const { data: records } = fetchSales.useQuery();
 
 const { data: summary } = fetchSaleSummary.useQuery();
-
 
 </script>
 
@@ -29,12 +32,15 @@ const { data: summary } = fetchSaleSummary.useQuery();
 
       <div class="border border-gray-300 rounded-lg p-4 shadow-sm bg-gradient-to-r from-green-200 to-blue-300">
         <h2 class="text-sm font-semibold text-gray-500">Total Sale Count🛍</h2>
-        <p class="text-xl font-bold text-gray-800">{{ data?.length }}</p>
+        <p class="text-xl font-bold text-gray-800">{{ records?.length }}</p>
       </div>
     </div>
 
     <div class="bg-white shadow-md rounded-lg">
-      <Table class="table-auto w-full">
+
+      <SaleDataTable :columns="salecolumns" :data="records || []" />
+
+      <!-- <Table class="table-auto w-full">
         <TableHeader class="bg-slate-700">
           <TableRow>
             <TableHead class="px-4 py-2 text-white">No</TableHead>
@@ -56,7 +62,7 @@ const { data: summary } = fetchSaleSummary.useQuery();
             <TableCell class="px-4 py-2">{{ sale.createdDate }}</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> -->
     </div>
   </div>
 </template>
