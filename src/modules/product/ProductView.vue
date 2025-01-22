@@ -1,32 +1,88 @@
 <script setup lang="ts">
-import { fetchStocks } from '@/api/product/queries';
+import { deleteProduct, fetchStocks, updateProduct } from '@/api/product/queries';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCounterStore } from '../cart/cartStore';
 import { DeleteIcon, LucideShoppingCart, ShoppingBagIcon, Trash2 } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
+import { useQueryClient } from '@tanstack/vue-query';
+import { toast } from '@/components/ui/toast';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader } from '@/components/ui/alert-dialog';
+import ProductDialog from './ProductDialog.vue';
+import { DeleteProductType, GetAllProductType } from '@/api/product/types';
 
 const { data } = fetchStocks.useQuery();
 const cartStore = useCounterStore();
 
 const totalItemsInCart = computed(() => cartStore.cartItems.reduce((total, item) => total + item.quantity, 0));
 
+const queryClient = useQueryClient();
 
+const isEdit = ref(false);
+const isDelete = ref(false);
+const isOpen = ref(false);
+const updateOldProduct = ref<GetAllProductType>()
+const deleteOldProduct = ref<DeleteProductType | null>(null);
+
+const openAddProductDialog = () => {
+  isOpen.value = true;
+  isEdit.value = false;
+  updateOldProduct.value = {} as GetAllProductType;
+};
+
+const openUpdateProductDialog = (product: any) => {
+  isOpen.value = true;
+  isEdit.value = true;
+  updateOldProduct.value = product;
+};
+
+const opendeleteProductDialog = (product: DeleteProductType) => {
+  isDelete.value = true;
+  deleteOldProduct.value = product;
+};
+
+const { mutate: deleteFn } = deleteProduct.useMutation({
+  onError: (data) => {
+    toast({
+      title: data.message,
+      variant: 'destructive',
+    })
+  },
+  onSuccess: async (data) => {
+    isDelete.value = false
+    toast({
+      title: data.message,
+    })
+    queryClient.invalidateQueries({
+      queryKey: ['getAllProduct']
+    })
+  }
+})
+
+const closeDialog = () => {
+  isOpen.value = false;
+  isEdit.value = false;
+  updateOldProduct.value = {} as GetAllProductType;
+};
 
 </script>
 
 <template>
-  <section class="p-3 h-full bg-gray-50">
+  <main class="p-3 h-full bg-gray-50">
     <TableCaption class="text-3xl font-semibold text-center text-slate-700 flex justify-center">Stock Page🛍🎗
     </TableCaption>
 
     <div class="flex justify-end mb-5">
-      <RouterLink to="/cart"
-        class="flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2">
+      <!-- <RouterLink to="/cart"
+        class="flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2"> -->
+      <Button
+        class="text-sm items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2 h-10"
+        @click="openAddProductDialog">
         <ShoppingBagIcon class="h-4 w-4 ml-1"></ShoppingBagIcon>
-        <p class="text-sm">Add New Product </p>
-      </RouterLink>
+        Add New Product
+      </Button>
+      <!-- </RouterLink> -->
       <RouterLink to="/cart"
         class="flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white py-2 px-4 rounded-lg shadow-2xl transition duration-300 relative">
         <LucideShoppingCart class="h-6 w-6 text-white" />
@@ -74,13 +130,40 @@ const totalItemsInCart = computed(() => cartStore.cartItems.reduce((total, item)
               Remove
               <LucideShoppingCart class="inline h-4 w-4 ml-1" />
             </Button>
-            <Button class="bg-orange-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm">
+            <Button class="bg-orange-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
+              @click="openUpdateProductDialog(product)">
               Edit
             </Button>
-            <Trash2 class="h-6 w-6 text-red-500 mt-2" />
+            <Trash2 class="h-6 w-6 text-red-500 mt-2" @click="opendeleteProductDialog(product)" />
           </TableCell>
         </TableRow>
       </TableBody>
     </Table>
-  </section>
+    <ProductDialog :isOpen="isOpen" :isEdit="isEdit" :allProduct="updateOldProduct" :closeDialog="closeDialog" />
+
+    <AlertDialog v-bind:open="isDelete">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          Are you sure you want to delete this product?
+          <AlertDialogDescription>
+            Are you sure you want to continue this progress?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+
+        <AlertDialogFooter>
+          <AlertDialogCancel @click="isDelete = false"
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm mr-5">
+            Cancel
+          </AlertDialogCancel>
+
+          <AlertDialogAction @click="deleteFn(deleteOldProduct!)"
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm">
+            Delete
+
+          </AlertDialogAction>
+
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </main>
 </template>

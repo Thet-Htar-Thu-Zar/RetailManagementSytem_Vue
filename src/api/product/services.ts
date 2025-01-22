@@ -28,20 +28,17 @@ const addProduct = async (
 const updateProduct = async (
   data: any
 ): Promise<APIResponse<UpdateProductInputType>> => {
-  const response = await axiosInstance.put<APIResponse<UpdateProductInputType>>(
-    `${baseUrL}/UpdateProduct`,
-    data
-  );
+  const response = await axiosInstance.post<
+    APIResponse<UpdateProductInputType>
+  >(`${baseUrL}/UpdateProduct`, data);
 
   return response.data;
 };
 
-const deleteProduct = async (
-  id: string
-): Promise<APIResponse<DeleteProductType>> => {
-  const response = await axiosInstance.delete<APIResponse<DeleteProductType>>(
-    `${baseUrL}/DeleteProduct?id=${id}`
-  );
+const deleteProduct = async (payload: DeleteProductType): Promise<any> => {
+  const response = await axiosInstance.delete(`${baseUrL}/DeleteProduct`, {
+    data: payload,
+  });
   return response.data;
 };
 

@@ -1,5 +1,9 @@
 import productServices from "./services";
-import { GetAllProductType, UpdateProductInputType } from "./types";
+import {
+  DeleteProductType,
+  GetAllProductType,
+  UpdateProductInputType,
+} from "./types";
 import { APIResponse } from "../config";
 import {
   useMutation,
@@ -33,7 +37,7 @@ export const addProduct = {
       mutationFn: (payload: GetAllProductType) =>
         productServices.addProduct(payload),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["createProduct"] });
+        queryClient.invalidateQueries({ queryKey: ["getallproduct"] });
       },
       ...opt,
     });
@@ -50,7 +54,7 @@ export const updateProduct = {
       mutationFn: (payload: UpdateProductInputType) =>
         productServices.updateProduct(payload),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["updateProduct"] });
+        queryClient.invalidateQueries({ queryKey: ["getallproduct"] });
       },
       ...opt,
     });
@@ -58,11 +62,17 @@ export const updateProduct = {
 };
 
 export const deleteProduct = {
-  useMutation: (opt?: UseMutationOptions<any, Error, string, any>) => {
+  useMutation: (
+    opt?: UseMutationOptions<any, Error, DeleteProductType, any>
+  ) => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationKey: ["deleteProduct"],
-      mutationFn: (id: string) => productServices.deleteProduct(id),
+      mutationFn: async (payload: DeleteProductType) =>
+        await productServices.deleteProduct(payload),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["getallproduct"] });
+      },
       ...opt,
     });
   },

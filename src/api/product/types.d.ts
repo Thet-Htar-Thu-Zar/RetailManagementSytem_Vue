@@ -11,12 +11,15 @@ export type GetAllProductType = {
   activeFlag: boolean;
 };
 
-// export type ProductType = {
-//     productID : string,
-//     productName: string,
-//     remainingStock: number,
-//     productPrice: number,
-// }
+export type ProductType = {
+  productID: string;
+  productName: string;
+  remainingStock: number;
+  productPrice: number;
+  productProfit: number;
+  createdDate: string;
+  updatedDate: string;
+};
 
 export type UpdateProductInputType = {
   productName: string;
