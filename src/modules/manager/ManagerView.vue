@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { fetchSales, fetchSaleSummary } from '@/api/sale/queries';
-import DataTable from '@/modules/manager/chunks/saleData-table.vue';
-import { salecolumns } from '@/modules/manager/chunks/saleColumns'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useVueTable } from '@tanstack/vue-table';
-import SaleDataTable from '@/modules/manager/chunks/saleData-table.vue';
+import SaleDataTable from './chunks/SaleData-table.vue';
+import { salecolumns } from './chunks/SaleColumns';
+
 
 const { data: records } = fetchSales.useQuery();
 

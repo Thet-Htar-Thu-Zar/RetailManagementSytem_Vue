@@ -29,6 +29,8 @@ import {
 import { ref } from 'vue';
 import { valueUpdater } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-vue-next';
 
 const props = defineProps<{
     columns: ColumnDef<TData, TValue>[]
@@ -134,22 +136,17 @@ const table = useVueTable({
     </div>
     <template v-if="table.getRowModel().rows?.length">
         <div class="flex items-center justify-end py-4 space-x-2">
-            <Button variant="primary" size="md" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()"
+            <Button variant="default" size="lg" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()"
                 class="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 disabled:opacity-50 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
                 Previous
             </Button>
             <span class="mx-4">
                 Page {{ table.getState().pagination.pageIndex + 1 }} of {{ table.getPageCount() }}
             </span>
-            <Button variant="primary" size="md" :disabled="!table.getCanNextPage()" @click="table.nextPage()"
+            <Button variant="default" size="lg" :disabled="!table.getCanNextPage()" @click="table.nextPage()"
                 class="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 disabled:opacity-50 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
                 Next
             </Button>
-
-            <!-- <div class="flex-1 text-sm text-muted-foreground">
-                {{ table.getFilteredSelectedRowModel().rows.length }} of
-                {{ table.getFilteredRowModel().rows.length }} row(s) selected.
-            </div> -->
 
         </div>
     </template>
