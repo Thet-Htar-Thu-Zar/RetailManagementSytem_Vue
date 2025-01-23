@@ -11,8 +11,8 @@ import { toast } from '@/components/ui/toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader } from '@/components/ui/alert-dialog';
 import ProductDialog from './chunks/ProductDialog.vue';
 import { DeleteProductType, GetAllProductType } from '@/api/product/types';
-import { productcolumns } from './chunks/productColumns';
-import ProductDataTable from './chunks/productData-table.vue';
+import ProductDataTable from './chunks/ProductData-table.vue';
+import { productcolumns } from './chunks/ProductColumns';
 
 const { data } = fetchStocks.useQuery();
 const cartStore = useCounterStore();
@@ -78,7 +78,7 @@ provide('opendeleteProductDialog', opendeleteProductDialog);
     <TableCaption class="text-3xl font-semibold text-center text-slate-700 flex justify-center">Stock Page🛍🎗
     </TableCaption>
 
-    <div class="flex justify-end mb-5">
+    <div class="flex justify-end mb-2">
 
       <Button
         class="text-sm items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 hover:bg-black text-white rounded-lg shadow-2xl transition duration-300 relative gap-2 mr-2 pr-2 h-10"
@@ -142,30 +142,29 @@ provide('opendeleteProductDialog', opendeleteProductDialog);
         </TableRow>
       </TableBody>
     </Table> -->
+
     <ProductDialog :isOpen="isOpen" :isEdit="isEdit" :allProduct="updateOldProduct" :closeDialog="closeDialog" />
 
     <AlertDialog v-bind:open="isDelete">
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          Are you sure you want to delete this product?
-          <AlertDialogDescription>
-            Are you sure you want to continue this progress?
-          </AlertDialogDescription>
+      <AlertDialogContent class="bg-white p-6 rounded-lg shadow-lg">
+        <AlertDialogHeader class="text-xl font-semibold text-gray-800">
+          Confirm Deletion
         </AlertDialogHeader>
+        <AlertDialogDescription class="mt-2 text-gray-600">
+          Are you sure you want to delete this product? This action cannot be undone.
+        </AlertDialogDescription>
 
-        <AlertDialogFooter>
+        <div class="mt-4 flex justify-end space-x-4">
           <AlertDialogCancel @click="isDelete = false"
-            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm mr-5">
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm">
             Cancel
           </AlertDialogCancel>
 
           <AlertDialogAction @click="deleteFn(deleteOldProduct!)"
             class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm">
             Delete
-
           </AlertDialogAction>
-
-        </AlertDialogFooter>
+        </div>
       </AlertDialogContent>
     </AlertDialog>
   </main>
