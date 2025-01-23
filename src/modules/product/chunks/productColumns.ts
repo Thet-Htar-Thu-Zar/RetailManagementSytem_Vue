@@ -1,9 +1,9 @@
 import { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 import { ProductType, UpdateProductInputType } from "@/api/product/types";
-import ProductAction from "./productAction.vue";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-vue-next";
+import ProductAction from "./ProductAction.vue";
 
 export const productcolumns: ColumnDef<UpdateProductInputType>[] = [
   {

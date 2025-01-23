@@ -5,6 +5,7 @@ import ProductView from "@/modules/product/ProductView.vue";
 import CartView from "@/modules/cart/CartView.vue";
 import CashierView from "@/modules/cashier/CashierView.vue";
 import ManagerView from "@/modules/manager/ManagerView.vue";
+import DashboardView from "@/modules/dashboard/DashboardView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,13 +14,13 @@ const router = createRouter({
       name: "",
       component: AppLayout,
       children: [
-        // {
-        //   path: '/',
-        //   name: 'dashboard',
-        //   component: Dashboard,
-        // },
         {
           path: "/",
+          name: "dashboard",
+          component: DashboardView,
+        },
+        {
+          path: "/product",
           name: "product",
           component: ProductView,
         },
