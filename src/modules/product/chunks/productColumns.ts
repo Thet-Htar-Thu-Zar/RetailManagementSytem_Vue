@@ -15,15 +15,7 @@ export const productcolumns: ColumnDef<UpdateProductInputType>[] = [
       return h("div", { class: "text-right font-medium" }, no);
     },
   },
-  // {
-  //   accessorKey: "productName",
-  //   header: () => h("div", { class: "text-center" }, "Product Name"),
-  //   cell: ({ row }) => {
-  //     const name = row.getValue("productName") as string;
 
-  //     return h("div", { class: "text-right font-medium" }, name);
-  //   },
-  // },
   {
     accessorKey: "productName",
     header: ({ column }) => {
@@ -31,43 +23,43 @@ export const productcolumns: ColumnDef<UpdateProductInputType>[] = [
         Button,
         {
           variant: "ghost",
-          class: "text-left",
+          class: "text-center ml-20",
           onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
         },
-        () => ["Product Name", h(ArrowUpDown, { class: "ml-2 h-4 w-4" })]
+        () => ["Product Name", h(ArrowUpDown, { class: "text-center  " })]
       );
     },
     cell: ({ row }) => {
-      const name = (row.getValue("productName") as string).toUpperCase();
+      const name = row.getValue("productName") as string;
 
-      return h("div", { class: "text-right font-medium" }, name);
+      return h("div", { class: "text-center font-medium" }, name);
     },
   },
   {
     accessorKey: "remainingStock",
-    header: () => h("div", { class: "text-right" }, "Remaining Stock"),
+    header: () => h("div", { class: "text-center" }, "Remaining Stock"),
     cell: ({ row }) => {
       const stock = Number.parseFloat(row.getValue("remainingStock"));
 
-      return h("div", { class: "text-right font-medium" }, stock);
+      return h("div", { class: "text-center font-medium" }, stock);
     },
   },
   {
     accessorKey: "productPrice",
-    header: () => h("div", { class: "text-right" }, "Price"),
+    header: () => h("div", { class: "text-center" }, "Price"),
     cell: ({ row }) => {
-      const price = Number.parseFloat(row.getValue("Product Price"));
+      const price = Number.parseFloat(row.getValue("productPrice"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
       }).format(price);
 
-      return h("div", { class: "text-right font-medium" }, formatted);
+      return h("div", { class: "text-center font-medium" }, formatted);
     },
   },
   {
     accessorKey: "productProfit",
-    header: () => h("div", { class: "text-right" }, "Product Profit"),
+    header: () => h("div", { class: "text-center" }, "Product Profit"),
     cell: ({ row }) => {
       const profit = Number.parseFloat(row.getValue("productProfit"));
       const formatted = new Intl.NumberFormat("en-US", {
@@ -75,7 +67,7 @@ export const productcolumns: ColumnDef<UpdateProductInputType>[] = [
         currency: "USD",
       }).format(profit);
 
-      return h("div", { class: "text-right font-medium" }, formatted);
+      return h("div", { class: "text-center font-medium" }, formatted);
     },
   },
   {

@@ -67,7 +67,7 @@ const { mutate: newAddProduct } = addProduct.useMutation({
     },
     onSettled: () => {
         queryClient.invalidateQueries({
-            queryKey: ['getAllProduct'],
+            queryKey: ['getallproduct'],
         });
     }
 })
@@ -89,15 +89,10 @@ const { mutate: updateOldProduct } = updateProduct.useMutation({
             duration: 1500,
         })
         queryClient.invalidateQueries({
-            queryKey: ['getAllProduct'],
+            queryKey: ['getallproduct'],
         });
         props.closeDialog();
     },
-    // onSettled: () => {
-    //     queryClient.invalidateQueries({
-    //         queryKey: ['getAllProduct'],
-    //     });
-    // }
 })
 
 const onSubmit = handleSubmit((values) => {

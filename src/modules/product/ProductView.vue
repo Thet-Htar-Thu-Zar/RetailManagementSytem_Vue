@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCounterStore } from '../stores/cartStore';
 import { LucideShoppingCart, ShoppingBagIcon, Trash2 } from 'lucide-vue-next';
-import { computed, ref } from 'vue';
+import { computed, provide, ref } from 'vue';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
 import { useQueryClient } from '@tanstack/vue-query';
 import { toast } from '@/components/ui/toast';
@@ -57,7 +57,7 @@ const { mutate: deleteFn } = deleteProduct.useMutation({
       title: data.message,
     })
     queryClient.invalidateQueries({
-      queryKey: ['getAllProduct']
+      queryKey: ['getallproduct']
     })
   }
 })
@@ -67,6 +67,9 @@ const closeDialog = () => {
   isEdit.value = false;
   updateOldProduct.value = {} as GetAllProductType;
 };
+
+provide('openUpdateProductDialog', openUpdateProductDialog);
+provide('opendeleteProductDialog', opendeleteProductDialog);
 
 </script>
 
