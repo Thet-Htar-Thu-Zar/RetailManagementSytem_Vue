@@ -36,7 +36,7 @@ const { data: summary } = fetchSaleSummary.useQuery();
       </div>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg">
+    <div class=" shadow-md rounded-lg">
 
       <SaleDataTable :columns="salecolumns" :data="records || []" />
 
