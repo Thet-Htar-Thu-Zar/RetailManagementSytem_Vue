@@ -74,7 +74,7 @@ provide('opendeleteProductDialog', opendeleteProductDialog);
 </script>
 
 <template>
-  <main class="p-3 h-full bg-gray-50">
+  <main class="p-3">
     <TableCaption class="text-3xl font-semibold text-center text-slate-700 flex justify-center">Stock Page🛍🎗
     </TableCaption>
 
