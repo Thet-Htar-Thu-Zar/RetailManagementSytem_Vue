@@ -32,7 +32,7 @@ const cartStore = useCounterStore();
 </script>
 
 <template>
-  <div class="p-6 min-h-screen bg-gray-100">
+  <div class="p-6 min-h-screen">
     <TableCaption class="text-3xl font-semibold text-center text-black flex justify-center mb-5">Cart Page
       <DotLottieVue class="w-10 h-10" autoplay loop
         src="https://lottie.host/8fefe20b-7e96-45cf-a3ad-c2234290ed53/pPANOzbuMZ.lottie"></DotLottieVue>
@@ -50,7 +50,7 @@ const cartStore = useCounterStore();
     </div>
 
 
-    <div v-else class="bg-white p-6 rounded-lg shadow-lg">
+    <div v-else class="p-6 rounded-lg shadow-lg">
       <div class="flex justify-between items-center mb-6">
         <div>
           <p class="text-xl font-medium text-gray-700">Total Amount: <span class="font-bold">${{
@@ -80,7 +80,7 @@ const cartStore = useCounterStore();
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow v-for="item in cartStore.cartItems" :key="item.productID" class="hover:bg-gray-100">
+          <TableRow v-for="item in cartStore.cartItems" :key="item.productID" class="">
             <TableCell class="px-4 py-2 border border-gray-300">{{ item.productName }}</TableCell>
             <TableCell class="px-4 py-2 border border-gray-300">${{ item.productPrice }}</TableCell>
             <TableCell class="px-4 py-2 border border-gray-300">

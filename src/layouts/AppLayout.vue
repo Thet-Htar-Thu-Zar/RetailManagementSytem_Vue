@@ -6,10 +6,10 @@ import Sidebar from './common/Sidebar.vue';
 <template>
     <div class="h-svh flex overflow-hidden">
         <aside>
-            <Sidebar/>
+            <Sidebar />
         </aside>
-        <main class="w-full min-h-full overflow-y-auto">
-            <RouterView/>
+        <main class="w-full overflow-y-auto">
+            <RouterView />
         </main>
     </div>
 </template>
